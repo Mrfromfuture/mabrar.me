@@ -72,6 +72,7 @@ h2{font-size:clamp(36px,6vw,60px);letter-spacing:-.04em;line-height:1.02;margin:
 .card h3{margin:0 0 8px;font-size:22px;letter-spacing:-.02em}
 .card p{margin:0;color:var(--muted)}
 .shot{height:170px;border-radius:6px;margin-bottom:18px;background:var(--text);display:flex;align-items:center;justify-content:center;color:var(--bg);font-weight:700;font-size:14px}
+.project-cover{height:auto;max-height:520px;margin-bottom:26px}.project-cover img{width:100%;height:auto;max-height:520px;object-fit:cover;border-radius:6px;display:block}.project-gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin:22px 0 64px}.project-gallery img{width:100%;height:220px;object-fit:cover;border-radius:6px;display:block}.project-video{width:100%;aspect-ratio:16/9;border:0;border-radius:6px;margin:10px 0 30px}
 .links{display:flex;flex-wrap:wrap;gap:14px;padding:18px 0 64px}
 footer{border-top:1px solid var(--line);padding:28px 0 100px;display:flex;flex-wrap:wrap;gap:14px;justify-content:space-between;color:var(--muted);font-size:15px}
 footer nav{display:flex;flex-wrap:wrap;gap:22px}
@@ -162,6 +163,11 @@ details.faq p{margin:10px 0 0;color:var(--muted)}
 <div class="cards" id="work-list" aria-live="polite"><div class="card"><p>Loading projects…</p></div></div>
 </section>
 
+<section class="view" id="v-project">
+<a class="back reveal" href="#work"><u>←</u> Back to our work</a>
+<div id="project-detail" aria-live="polite"><div class="card"><p>Loading project…</p></div></div>
+</section>
+
 <section class="view" id="v-about">
 <a class="back reveal" href="#"><u>←</u> Home</a>
 <h2 class="reveal">About us</h2>
@@ -224,10 +230,10 @@ details.faq p{margin:10px 0 0;color:var(--muted)}
 <script>
 (function(){
 var reduced=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-var names=['services','work','about','contact'];
+var names=['services','work','project','about','contact'];
 function show(){
 var h=(location.hash||'').replace('#','');
-var id=names.indexOf(h)>-1?h:'home';
+var id=names.indexOf(h)>-1?h:(h.indexOf('project-')===0&&h.length>8?'project':'home');
 var all=document.querySelectorAll('.view');
 for(var i=0;i<all.length;i++){all[i].classList.remove('on')}
 var el=document.getElementById('v-'+id);
@@ -288,11 +294,13 @@ function msg(t){list.textContent='';var c=document.createElement('div');c.classN
 function safeUrl(u){try{var x=new URL(u);return(x.protocol==='https:'||x.protocol==='http:')?x.href:null}catch(e){return null}}
 function card(p,i){
 var c=document.createElement('div');c.className='card reveal';c.style.setProperty('--i',i);
+var slug=String(p.slug||'').trim();
+if(slug){c.setAttribute('role','link');c.tabIndex=0;c.addEventListener('click',function(e){if(e.target.closest&&e.target.closest('a')){return}location.hash='project-'+slug});c.addEventListener('keydown',function(e){if((e.key==='Enter'||e.key===' ')&&!(e.target.closest&&e.target.closest('a'))){e.preventDefault();location.hash='project-'+slug}})}
 var s=document.createElement('div');s.className='shot';
 var img=safeUrl(p.cover_image);
 if(img){var im=document.createElement('img');im.src=img;im.alt=p.title||'';im.loading='lazy';s.appendChild(im)}else{s.textContent=p.category||'Project'}
 c.appendChild(s);
-var h=document.createElement('h3');h.textContent=p.title||'';c.appendChild(h);
+var h=document.createElement('h3');if(slug){var titleLink=document.createElement('a');titleLink.href='#project-'+slug;titleLink.textContent=p.title||'';h.appendChild(titleLink)}else{h.textContent=p.title||''}c.appendChild(h);
 if(p.summary){var d=document.createElement('p');d.textContent=p.summary;c.appendChild(d)}
 if(p.technologies&&p.technologies.length){var t=document.createElement('p');t.className='tech';t.textContent=p.technologies.join(', ');c.appendChild(t)}
 var u=safeUrl(p.live_url);
@@ -306,6 +314,54 @@ if(!r.data||!r.data.length){msg('New projects are coming soon.');return}
 list.textContent='';
 r.data.forEach(function(p,i){list.appendChild(card(p,i))});
 }).catch(function(){msg('Projects could not be loaded right now. Please try again later.')});
+})();
+</script>
+<script>
+(function(){
+var box=document.getElementById('project-detail');
+if(!box)return;
+function $(id){return document.getElementById(id)}
+function el(tag,cls,text){var e=document.createElement(tag);if(cls){e.className=cls}if(text!=null){e.textContent=text}return e}
+function safeUrl(u){try{var x=new URL(u);return(x.protocol==='https:'||x.protocol==='http:')?x.href:null}catch(e){return null}}
+function values(v){if(Array.isArray(v)){return v.filter(function(x){return x!=null&&String(x).trim()}).map(function(x){return String(x).trim()})}if(typeof v==='string'&&v.trim()){return v.split(/\r?\n|,/).map(function(x){return x.trim()}).filter(Boolean)}return[]}
+function back(){var a=el('a','back', 'Back to our work');a.href='#work';a.insertBefore(el('u',null,'←'),a.firstChild);return a}
+function message(text){box.textContent='';var c=el('div','card');c.appendChild(el('p',null,text));c.appendChild(back());box.appendChild(c)}
+function videoEmbed(url){
+var x;try{x=new URL(url)}catch(e){return null}
+var host=x.hostname.toLowerCase(),id=null;
+if(host==='youtube.com'||host==='www.youtube.com'||host==='youtu.be'){
+if(host==='youtu.be'){id=x.pathname.slice(1)}else if(x.pathname==='/watch'){id=x.searchParams.get('v')}else if(x.pathname.indexOf('/embed/')===0){id=x.pathname.slice(7).split('/')[0]}
+if(id&&/^[A-Za-z0-9_-]{6,}$/.test(id)){return 'https://www.youtube-nocookie.com/embed/'+encodeURIComponent(id)}
+}
+if(host==='vimeo.com'||host==='www.vimeo.com'||host==='player.vimeo.com'){
+var match=x.pathname.match(/(?:\/video\/)?(\d+)/);if(match){return 'https://player.vimeo.com/video/'+match[1]}
+}
+return null
+}
+function addField(parent,label,value){if(value==null||!String(value).trim())return;parent.appendChild(el('h3',null,label));parent.appendChild(el('p',null,String(value)))}
+function load(slug){
+box.textContent='';box.appendChild(el('div','card', 'Loading project…'));
+if(!window.sbPublic){message('This project could not be loaded right now.');return}
+window.sbPublic.from('projects').select('title,category,summary,problem,solution,audience,features,technologies,outcome,live_url,video_url,cover_image,images').eq('published',true).eq('slug',slug).maybeSingle().then(function(r){
+if(r.error||!r.data){document.title='Mabrar Studio – Project';message('We could not find that project.');return}
+var p=r.data;document.title=(p.title?String(p.title)+' – ':'')+'Mabrar Studio';box.textContent='';
+var content=el('div','project-content');
+var cover=safeUrl(p.cover_image);if(cover){var ci=el('div','project-cover');var im=el('img');im.src=cover;im.alt=p.title||'';im.loading='lazy';ci.appendChild(im);content.appendChild(ci)}
+if(p.title)content.appendChild(el('h1',null,p.title));
+if(p.category)content.appendChild(el('p','tag',p.category));
+if(p.summary)content.appendChild(el('p','lead',p.summary));
+addField(content,'The problem',p.problem);addField(content,'The solution',p.solution);addField(content,'Who it is for',p.audience);
+var features=values(p.features);if(features.length){content.appendChild(el('h3',null,'Features'));var fl=el('ul');features.forEach(function(v){fl.appendChild(el('li',null,v))});content.appendChild(fl)}
+var technologies=values(p.technologies);if(technologies.length)addField(content,'Technologies',technologies.join(', '));
+addField(content,'Outcome',p.outcome);
+var live=safeUrl(p.live_url);if(live){var lb=el('a','btn','View live');lb.href=live;lb.target='_blank';lb.rel='noopener';content.appendChild(lb)}
+var video=safeUrl(p.video_url);if(video){var embed=videoEmbed(video);if(embed){content.appendChild(el('h3',null,'Video'));var frame=el('iframe','project-video');frame.src=embed;frame.loading='lazy';frame.title=(p.title||'Project')+' video';frame.setAttribute('allowfullscreen','');content.appendChild(frame)}else{var va=el('a','btn o','Watch video');va.href=video;va.target='_blank';va.rel='noopener';content.appendChild(va)}}
+var images=values(p.images).map(safeUrl).filter(Boolean);if(images.length){content.appendChild(el('h3',null,'More images'));var gallery=el('div','project-gallery');images.forEach(function(src){var image=el('img');image.src=src;image.alt=p.title||'';image.loading='lazy';gallery.appendChild(image)});content.appendChild(gallery)}
+box.appendChild(content);
+}).catch(function(){document.title='Mabrar Studio – Project';message('We could not load this project right now. Please try again.')});
+}
+function route(){var hash=(location.hash||'').replace('#','');if(hash.indexOf('project-')===0&&hash.length>8){try{load(decodeURIComponent(hash.slice(8)))}catch(e){message('We could not find that project.')}}}
+window.addEventListener('hashchange',route);route();
 })();
 </script>
 <script>
