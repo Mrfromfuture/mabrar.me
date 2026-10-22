@@ -107,15 +107,15 @@ create policy "public read logos" on public.tech_logos for select to anon using 
 
 -- Admin: full access
 drop policy if exists "admin all settings" on public.site_settings;
-create policy "admin all settings" on public.site_settings for all to authenticated using (true) with check (true);
+create policy "admin all settings" on public.site_settings for all to authenticated using ((auth.jwt() ->> 'email') = 'memrabrar@gmail.com') with check ((auth.jwt() ->> 'email') = 'memrabrar@gmail.com');
 drop policy if exists "admin all services" on public.services;
-create policy "admin all services" on public.services for all to authenticated using (true) with check (true);
+create policy "admin all services" on public.services for all to authenticated using ((auth.jwt() ->> 'email') = 'memrabrar@gmail.com') with check ((auth.jwt() ->> 'email') = 'memrabrar@gmail.com');
 drop policy if exists "admin all faqs" on public.faqs;
-create policy "admin all faqs" on public.faqs for all to authenticated using (true) with check (true);
+create policy "admin all faqs" on public.faqs for all to authenticated using ((auth.jwt() ->> 'email') = 'memrabrar@gmail.com') with check ((auth.jwt() ->> 'email') = 'memrabrar@gmail.com');
 drop policy if exists "admin all testimonials" on public.testimonials;
-create policy "admin all testimonials" on public.testimonials for all to authenticated using (true) with check (true);
+create policy "admin all testimonials" on public.testimonials for all to authenticated using ((auth.jwt() ->> 'email') = 'memrabrar@gmail.com') with check ((auth.jwt() ->> 'email') = 'memrabrar@gmail.com');
 drop policy if exists "admin all logos" on public.tech_logos;
-create policy "admin all logos" on public.tech_logos for all to authenticated using (true) with check (true);
+create policy "admin all logos" on public.tech_logos for all to authenticated using ((auth.jwt() ->> 'email') = 'memrabrar@gmail.com') with check ((auth.jwt() ->> 'email') = 'memrabrar@gmail.com');
 
 -- Inquiries: the public may ONLY insert (never read). Admin may read/update/delete.
 drop policy if exists "public insert inquiries" on public.inquiries;
@@ -133,7 +133,7 @@ create policy "public insert inquiries" on public.inquiries for insert to anon
     and (reference_link is null or char_length(reference_link) <= 500)
   );
 drop policy if exists "admin all inquiries" on public.inquiries;
-create policy "admin all inquiries" on public.inquiries for all to authenticated using (true) with check (true);
+create policy "admin all inquiries" on public.inquiries for all to authenticated using ((auth.jwt() ->> 'email') = 'memrabrar@gmail.com') with check ((auth.jwt() ->> 'email') = 'memrabrar@gmail.com');
 
 -- ---------------------------------------------------------------------
 -- Starting content (taken from your requirements document). Edit in admin.
