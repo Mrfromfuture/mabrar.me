@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Privacy policy – Mabrar Studio</title>
+<meta name="description" content="Privacy policy for mabrar.me.">
+<link rel="canonical" href="https://mabrar.me/privacy.html">
+<style>
+:root{color-scheme:light;--bg:#FFFFFF;--panel:#F5F5F7;--text:#1D1D1F;--muted:#6E6E73;--line:#D2D2D7;--accent:#1D1D1F;--onacc:#FFFFFF;--fx:#0866FF;--ease:cubic-bezier(.2,.8,.2,1);
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;--bg:#000000;--panel:#1D1D1F;--text:#F5F5F7;--muted:#A1A1A6;--line:#424245;--accent:#F5F5F7;--onacc:#1D1D1F;--fx:#4C9AFF}}
+:root[data-theme="dark"]{color-scheme:dark;--bg:#000000;--panel:#1D1D1F;--text:#F5F5F7;--muted:#A1A1A6;--line:#424245;--accent:#F5F5F7;--onacc:#1D1D1F;--fx:#4C9AFF}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+.wrap{position:relative;z-index:1;max-width:1120px;margin:0 auto;padding:0 22px}
+.net{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+header{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:22px 0;border-bottom:1px solid var(--line)}
+.logo{font-weight:800;font-size:22px;letter-spacing:-.03em}
+.logo i{font-style:normal;color:var(--accent)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--accent);color:var(--onacc);padding:14px 26px;border-radius:6px;font-weight:700;font-size:16px;min-height:46px;border:2px solid var(--accent);transition:background .25s,color .25s,transform .25s var(--ease)}
+.btn:hover{background:transparent;color:var(--accent);transform:translateY(-2px)}
+.btn.o{background:transparent;color:var(--text);border-color:var(--text)}
+.btn.o:hover{background:var(--text);color:var(--bg)}
+.view{display:none}.view.on{display:block}
+.reveal{opacity:0}
+.view.on .reveal{animation:up .8s var(--ease) both;animation-delay:calc(var(--i,0)*80ms)}
+@keyframes up{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:none}}
+::view-transition-old(root){animation:.25s ease both vout}
+::view-transition-new(root){animation:.01s both vin}
+@keyframes vout{to{opacity:0}}
+@keyframes vin{from{opacity:0}to{opacity:1}}
+.hero{padding:88px 0 56px}
+.tag{font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
+h1{font-size:clamp(40px,7.6vw,84px);line-height:1;letter-spacing:-.045em;margin:20px 0 24px;max-width:920px;font-weight:800}
+.w{display:inline-block;overflow:hidden;vertical-align:top;padding:0 .04em .12em}
+.w>span{display:inline-block;transform:translateY(110%);animation:word .9s var(--ease) forwards;animation-delay:calc(var(--k)*70ms + 100ms)}
+@keyframes word{to{transform:none}}
+.acc{color:var(--accent)}
+.lead{font-size:clamp(17px,2.4vw,21px);color:var(--muted);max-width:540px;margin:0 0 30px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:0;border:1px solid var(--line);border-radius:8px;overflow:hidden;margin:16px 0 80px}
+.tile{display:flex;flex-direction:column;gap:6px;background:var(--bg);padding:30px;min-height:230px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);margin:0 -1px -1px 0;transition:background .35s var(--ease),color .35s var(--ease)}
+.tile small{font-size:14px;font-weight:700;color:var(--accent);transition:color .35s}
+.tile b{font-size:26px;letter-spacing:-.025em;margin-top:6px}
+.tile span{color:var(--muted);font-size:16px;transition:color .35s}
+.tile em{margin-top:auto;font-style:normal;font-weight:700;display:flex;align-items:center;gap:8px}
+.tile em u{text-decoration:none;display:inline-block;transition:transform .4s var(--ease)}
+.tile:hover{background:var(--accent);color:var(--onacc)}
+.tile:hover small,.tile:hover span{color:var(--onacc)}
+.tile:hover em u{transform:translateX(10px)}
+.back{display:inline-flex;gap:8px;align-items:center;margin:24px 0 10px;font-weight:700;min-height:44px}
+.back u{text-decoration:none;display:inline-block;transition:transform .35s var(--ease)}
+.back:hover u{transform:translateX(-7px)}
+.back:hover{color:var(--accent)}
+h2{font-size:clamp(36px,6vw,60px);letter-spacing:-.04em;line-height:1.02;margin:4px 0 14px;font-weight:800}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px;padding:22px 0 64px}
+.card{background:var(--panel);border-radius:8px;padding:26px;border:1px solid transparent;transition:transform .4s var(--ease),border-color .25s}
+.card:hover{transform:translateY(-6px);border-color:var(--accent)}
+.card h3{margin:0 0 8px;font-size:22px;letter-spacing:-.02em}
+.card p{margin:0;color:var(--muted)}
+.shot{height:170px;border-radius:6px;margin-bottom:18px;background:var(--text);display:flex;align-items:center;justify-content:center;color:var(--bg);font-weight:700;font-size:14px}
+.links{display:flex;flex-wrap:wrap;gap:14px;padding:18px 0 64px}
+footer{border-top:1px solid var(--line);padding:28px 0 100px;display:flex;flex-wrap:wrap;gap:14px;justify-content:space-between;color:var(--muted);font-size:15px}
+footer nav{display:flex;flex-wrap:wrap;gap:22px}
+footer a{transition:color .2s}footer a:hover{color:var(--accent)}
+.sq{display:none;grid-template-columns:repeat(2,9px);gap:2px;margin-right:10px;vertical-align:-1px}
+.sq b{width:9px;height:9px;display:block}
+.sq b:nth-child(1){background:#F25022}.sq b:nth-child(2){background:#7FBA00}.sq b:nth-child(3){background:#00A4EF}.sq b:nth-child(4){background:#FFB900}
+.ms .sq{display:inline-grid}
+.sw{position:fixed;left:50%;bottom:calc(14px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:20;display:flex;gap:4px;max-width:calc(100% - 24px);background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:5px;box-shadow:0 8px 30px rgba(0,0,0,.18)}
+.sw span{padding:0 10px;color:var(--muted);font-size:13px;align-self:center;white-space:nowrap}
+.sw button{font:inherit;font-size:14px;font-weight:700;background:none;border:0;color:var(--text);padding:10px 14px;border-radius:999px;min-height:44px;cursor:pointer;transition:background .25s,color .25s}
+.sw button[aria-pressed="true"]{background:var(--accent);color:var(--onacc)}
+@media (max-width:560px){.sw span{display:none}.sw button{padding:10px 11px;font-size:13px}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.reveal{opacity:1}.w>span{transform:none}}
+.doc{max-width:760px;padding:8px 0 72px}
+.doc h2{font-size:clamp(30px,5vw,44px);margin:12px 0 8px}
+.doc h3{font-size:22px;margin:32px 0 6px;letter-spacing:-.02em}
+.doc p,.doc li{color:var(--muted);font-size:17px}
+.doc ul{padding-left:22px}
+.doc a{text-decoration:underline}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+<a class="logo" href="index.html">Mabrar Studio<i>.</i></a>
+<a class="btn" href="index.html#contact">Contact us</a>
+</header>
+<main class="doc">
+<a class="back" href="index.html"><u>←</u> Home</a>
+<h2>Privacy policy</h2>
+<p>Last updated: October 22, 2026.</p>
+<p>This policy explains what information the website at mabrar.me collects and how it is used. You can reach us at <a href="mailto:memrabrar@gmail.com">memrabrar@gmail.com</a> or <a href="tel:+923206421287">03206421287</a>.</p>
+<h3>Information you send us</h3>
+<p>When you send a project request on the Contact page, we collect the details you type into the form: your name, email address, project description, and, if you choose to give them, your phone number, company name, chosen service, budget, timeline and a reference link.</p>
+<h3>How we use it</h3>
+<p>We use this information only to read your request, reply to you and discuss your project. We do not publish it, and we do not sell it.</p>
+<h3>Where it is stored</h3>
+<p>Requests are stored in a database provided by Supabase. The website is served by Netlify. These providers process data on our behalf so the website can work. Only the site administrator can read project requests.</p>
+<h3>How long we keep it</h3>
+<p>We keep a request for as long as we need it to respond and to keep a record of our conversation. You can ask us to delete your request by writing to the email address above.</p>
+<h3>Cookies and analytics</h3>
+<p>At the time of writing, this website does not use advertising cookies or analytics. If we add analytics, we will update this page first.</p>
+<h3>Your choices</h3>
+<p>You can ask us what information we hold about you, ask us to correct it, or ask us to delete it, by contacting us at the email address above.</p>
+<h3>Changes</h3>
+<p>If we change how we handle information, we will update this page and its date.</p>
+
+</main>
+<footer>
+<div>© 2026 Mabrar Studio</div>
+<nav><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a></nav>
+</footer>
+</div>
+</body>
+</html>
